@@ -1,0 +1,215 @@
+Answers for the world queries go here:
+
+For example:
+
+1. What are the names of all the cities in the Netherlands?
+
+SELECT city.Name FROM city JOIN country ON city.CountryCode = country.Code WHERE country.Name = 'Netherlands';
++-------------------+
+| Name              |
++-------------------+
+| Amsterdam         |
+| Rotterdam         |
+| Haag              |
+| Utrecht           |
+| Eindhoven         |
+| Tilburg           |
+| Groningen         |
+| Breda             |
+| Apeldoorn         |
+| Nijmegen          |
+| Enschede          |
+| Haarlem           |
+| Almere            |
+| Arnhem            |
+| Zaanstad          |
+| ´s-Hertogenbosch  |
+| Amersfoort        |
+| Maastricht        |
+| Dordrecht         |
+| Leiden            |
+| Haarlemmermeer    |
+| Zoetermeer        |
+| Emmen             |
+| Zwolle            |
+| Ede               |
+| Delft             |
+| Heerlen           |
+| Alkmaar           |
++-------------------+
+28 rows in set (0.00 sec)
+
+2. What is the population of Rotterdam ?
+
+select city.Population from city where Name='Rotterdam';
++------------+
+| Population |
++------------+
+|     593321 |
++------------+
+
+3. What's the name of all the countries on the continent ‘North America’ ?
+
+select Name from country where continent='North America';
++----------------------------------+
+| Name                             |
++----------------------------------+
+| Aruba                            |
+| Anguilla                         |
+| Netherlands Antilles             |
+| Antigua and Barbuda              |
+| Bahamas                          |
+| Belize                           |
+| Bermuda                          |
+| Barbados                         |
+| Canada                           |
+| Costa Rica                       |
+| Cuba                             |
+| Cayman Islands                   |
+| Dominica                         |
+| Dominican Republic               |
+| Guadeloupe                       |
+| Grenada                          |
+| Greenland                        |
+| Guatemala                        |
+| Honduras                         |
+| Haiti                            |
+| Jamaica                          |
+| Saint Kitts and Nevis            |
+| Saint Lucia                      |
+| Mexico                           |
+| Montserrat                       |
+| Martinique                       |
+| Nicaragua                        |
+| Panama                           |
+| Puerto Rico                      |
+| El Salvador                      |
+| Saint Pierre and Miquelon        |
+| Turks and Caicos Islands         |
+| Trinidad and Tobago              |
+| United States                    |
+| Saint Vincent and the Grenadines |
+| Virgin Islands, British          |
+| Virgin Islands, U.S.             |
++----------------------------------+
+
+4. What's the top 10 countries by SurfaceArea ?
+
+select Name from country order by SurfaceArea desc limit 10;
++--------------------+
+| Name               |
++--------------------+
+| Russian Federation |
+| Antarctica         |
+| Canada             |
+| China              |
+| United States      |
+| Brazil             |
+| Australia          |
+| India              |
+| Argentina          |
+| Kazakstan          |
++--------------------+
+
+5. What's the top 10 most populated cities?
+
+select Name from city order by Population desc limit 10;
++-------------------+
+| Name              |
++-------------------+
+| Mumbai (Bombay)   |
+| Seoul             |
+| S??o Paulo        |
+| Shanghai          |
+| Jakarta           |
+| Karachi           |
+| Istanbul          |
+| Ciudad de M??xico |
+| Moscow            |
+| New York          |
++-------------------+
+
+6. Select the top 3 countries by population that their names start with the letter ‘P’
+
+select Name from city where Name like 'P%' order by Population desc limit 3;
++--------------+
+| Name         |
++--------------+
+| Peking       |
+| Pusan        |
+| Pyongyang    |
++--------------+
+
+7. What is the population in Asia?
+
+select continent, sum(Population) from country where continent = 'Asia' group by continent;
++-----------+-----------------+
+| continent | sum(Population) |
++-----------+-----------------+
+| Asia      |      3705025700 |
++-----------+-----------------+
+
+7. Which languages are spoken in the Region of ‘South America’
+
+ select Language, CountryCode from Country join countrylanguage on country.Code = countrylanguage.CountryCode where continent = 'South America';
++------------------+-------------+
+| Language         | CountryCode |
++------------------+-------------+
+| Indian Languages | ARG         |
+| Italian          | ARG         |
+| Spanish          | ARG         |
+| Aimar??          | BOL         |
+| Guaran??         | BOL         |
+| Ket??ua          | BOL         |
+| Spanish          | BOL         |
+| German           | BRA         |
+| Indian Languages | BRA         |
+| Italian          | BRA         |
+| Japanese         | BRA         |
+| Portuguese       | BRA         |
+| Aimar??          | CHL         |
+| Araucan          | CHL         |
+| Rapa nui         | CHL         |
+| Spanish          | CHL         |
+| Arawakan         | COL         |
+| Caribbean        | COL         |
+| Chibcha          | COL         |
+| Creole English   | COL         |
+| Spanish          | COL         |
+| Ket??ua          | ECU         |
+| Spanish          | ECU         |
+| English          | FLK         |
+| Creole French    | GUF         |
+| Indian Languages | GUF         |
+| Arawakan         | GUY         |
+| Caribbean        | GUY         |
+| Creole English   | GUY         |
+| Aimar??          | PER         |
+| Ket??ua          | PER         |
+| Spanish          | PER         |
+| German           | PRY         |
+| Guaran??         | PRY         |
+| Portuguese       | PRY         |
+| Spanish          | PRY         |
+| Hindi            | SUR         |
+| Sranantonga      | SUR         |
+| Spanish          | URY         |
+| Goajiro          | VEN         |
+| Spanish          | VEN         |
+| Warrau           | VEN         |
++------------------+-------------+
+
+9. What are the languages spoken on all cities named ‘Barcelona’ (you may need to join 3 tables =))
+
+select Language, Name from city join countrylanguage on city.CountryCode = countrylanguage.CountryCode where Name = 'Barcelona';
++----------+-----------+
+| Language | Name      |
++----------+-----------+
+| Basque   | Barcelona |
+| Catalan  | Barcelona |
+| Galecian | Barcelona |
+| Spanish  | Barcelona |
+| Goajiro  | Barcelona |
+| Spanish  | Barcelona |
+| Warrau   | Barcelona |
++----------+-----------+
